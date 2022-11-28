@@ -1,0 +1,8 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Cog-Creators/Red-DiscordBot/V3/develop/schema/red_cog_repo.schema.json",
+  "name": "catppuccin-cogs",
+  "author": ["nekowinston (winston#0001)"],
+  "short": "Cogs for the Catppuccin Discord bot.",
+  "description": "Cogs for the Catppuccin Discord bot.",
+  "install_msg": "Thank you for installing my repo!"
+}

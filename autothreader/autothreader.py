@@ -7,11 +7,13 @@ class AutoThreader(commands.Cog):
 
     def __init__(self, bot):
         self.bot = bot
-        self.config = Config.get_conf(self, identifier=8957967497)
+        self.config = Config.get_conf(
+            self, identifier=8957967497, force_registration=True
+        )
         self.config.register_guild(autothread_channels=[])
 
     @commands.Cog.listener()
-    async def on_message(self, msg: Message):
+    async def on_message(self, msg: Message) -> None:
         """Create a thread for each message in a channel."""
         guild = msg.guild
 
@@ -27,12 +29,12 @@ class AutoThreader(commands.Cog):
     @commands.guild_only()
     @commands.admin_or_permissions(manage_channels=True)
     @commands.command(name="autothread")
-    async def autothread(self, ctx: commands.Context, channel: TextChannel):
+    async def autothread(self, ctx: commands.Context, channel: TextChannel) -> None:
         """Setup a channel for autothreading."""
         guild = ctx.guild
 
         if guild is None:
-            return await ctx.send("This command can only be used in a server.")
+            return
 
         watched_channels = await self.config.guild(guild).autothread_channels()
 
@@ -45,7 +47,7 @@ class AutoThreader(commands.Cog):
 
         await self.config.guild(guild).autothread_channels.set(watched_channels)
 
-    async def create_thread(self, msg: Message):
+    async def create_thread(self, msg: Message) -> None:
         """Setup a channel for autothreading."""
         channel = msg.channel
         thread_title = (
