@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "catppuccin-cogs"
+version = "0.1.0"
+description = "Custom cogs for Pepperjack"
+authors = ["winston <hey@winston.sh>"]
+license = "MIT"
+readme = "README.md"
+packages = [{include = "catppuccin_cogs"}]
+
+[tool.poetry.dependencies]
+python = "^3.9,<3.10"
+red-discordbot = {git = "https://github.com/Cog-Creators/Red-DiscordBot", rev = "V3/develop"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
