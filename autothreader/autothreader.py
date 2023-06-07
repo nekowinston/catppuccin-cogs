@@ -1,9 +1,9 @@
-from discord import TextChannel, Message
-from redbot.core import commands, Config
+from discord import Message, TextChannel
+from redbot.core import Config, commands
 
 
 class AutoThreader(commands.Cog):
-    """A cog creating threads for each message in a channel."""
+    """Create a thread for each message in a channel."""
 
     def __init__(self, bot):
         self.bot = bot
