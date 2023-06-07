@@ -1,5 +1,5 @@
 {
-  "$schema": "https://raw.githubusercontent.com/Cog-Creators/Red-DiscordBot/V3/develop/schema/red_cog_repo.schema.json",
+  "$schema": "https://raw.githubusercontent.com/Cog-Creators/Red-DiscordBot/3.5.2/schema/red_cog_repo.schema.json",
   "name": "catppuccin-cogs",
   "author": ["nekowinston (winston#0001)"],
   "short": "Cogs for the Catppuccin Discord bot.",
