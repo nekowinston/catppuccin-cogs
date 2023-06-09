@@ -9,7 +9,6 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = ">=3.8.1,<3.12"
 red-discordbot = ">=3.5.2,<=3.6.0"
-humanfriendly = "*"
 
 [build-system]
 requires = ["poetry-core"]
