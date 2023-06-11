@@ -135,4 +135,7 @@ class HornyTimer(commands.Cog):
 
     async def _get_random_bonk_image(self, guild: Guild) -> BonkImage | None:
         bonk_images = await self._get_bonk_images(guild)
-        return bonk_images[random.randint(0, len(bonk_images) - 1)]
+        try:
+            return bonk_images[random.randint(0, len(bonk_images) - 1)]
+        except:
+            return None
