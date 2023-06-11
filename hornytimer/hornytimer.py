@@ -49,7 +49,7 @@ class HornyTimer(commands.Cog):
         await interaction.response.send_message(
             embed=discord.Embed(
                 title="Timer reset.",
-                description=f"Timer reset. This discord managed to not be horny for {self.get_time_diff(prev_timestamp)}.",
+                description=f"Timer reset. This discord managed to not be horny for {self._get_time_diff(prev_timestamp)}.",
             ).set_image(url=random_bonk_image["url"])
         )
 
@@ -60,7 +60,7 @@ class HornyTimer(commands.Cog):
         if not interaction.guild:
             return
 
-        diff = self.get_time_diff(await self._get_last_horny(interaction.guild))
+        diff = self._get_time_diff(await self._get_last_horny(interaction.guild))
         await interaction.response.send_message(
             f"Timer hasn't been reset for {diff}. Good job everyone!"
         )
@@ -101,7 +101,7 @@ class HornyTimer(commands.Cog):
         await ctx.send("Bonk image removed.")
 
     @bonkimage.command(name="list")
-    async def bonk_image_list(self, ctx: commands.Context):
+    async def bonk_image_list(self, ctx: commands.Context) -> None:
         """Remove a bonk image from the list of bonk images."""
         if not ctx.guild:
             return
@@ -114,12 +114,10 @@ class HornyTimer(commands.Cog):
             await ctx.send("No bonk images found.")
             return
 
-        ret = []
         for page in pagify("\n".join(embed_list)):
-            ret.append(await ctx.send(page))
-        return ret
+            await ctx.send(page)
 
-    def get_time_diff(self, timestamp: float) -> str:
+    def _get_time_diff(self, timestamp: float) -> str:
         return humanize_timedelta(
             timedelta=(timedelta(seconds=datetime.now().timestamp() - timestamp))
         )
