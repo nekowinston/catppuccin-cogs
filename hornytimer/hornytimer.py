@@ -44,14 +44,16 @@ class HornyTimer(commands.Cog):
             (await self.config.guild(interaction.guild).reset_count()) + 1
         )
 
-        random_bonk_image = await self._get_random_bonk_image(interaction.guild)
-
-        await interaction.response.send_message(
-            embed=discord.Embed(
-                title="Timer reset.",
-                description=f"Timer reset. This discord managed to not be horny for {self._get_time_diff(prev_timestamp)}.",
-            ).set_image(url=random_bonk_image["url"])
+        embed = discord.Embed(
+            title="Timer reset.",
+            description=f"Timer reset. This discord managed to not be horny for {self._get_time_diff(prev_timestamp)}.",
         )
+
+        image = await self._get_random_bonk_image(interaction.guild)
+        if image:
+            embed.set_image(url=image["url"])
+
+        await interaction.response.send_message(embed=embed)
 
     @app_commands.command(name="checkhornytimer")
     @app_commands.guild_only()
@@ -68,7 +70,7 @@ class HornyTimer(commands.Cog):
     @commands.group()
     @commands.guild_only()
     @commands.mod_or_permissions(manage_channels=True)
-    async def bonkimage(self, ctx: commands.Context):
+    async def bonkimage(self, _: commands.Context):
         """Manage bonk images."""
 
     @bonkimage.command(name="add")
@@ -131,6 +133,6 @@ class HornyTimer(commands.Cog):
     async def _get_bonk_images(self, guild: Guild) -> List[BonkImage]:
         return await self.config.guild(guild).bonk_images()
 
-    async def _get_random_bonk_image(self, guild: Guild) -> BonkImage:
+    async def _get_random_bonk_image(self, guild: Guild) -> BonkImage | None:
         bonk_images = await self._get_bonk_images(guild)
         return bonk_images[random.randint(0, len(bonk_images) - 1)]
